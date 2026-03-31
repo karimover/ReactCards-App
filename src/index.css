@@ -109,3 +109,9 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+
+.completed {
+  background-color: #c084fc;
+  color: white;
+}
