@@ -1,26 +1,20 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
-import "./App.css";
-import { Counter } from "./Counter";
-import { List } from "./list";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MainLayout } from "./components/MainLayout";
 
 function App() {
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <hr />
-      </section>
-      <Counter />
-      <hr />
-      <List />
-    </>
-  );
+    // return <MainLayout />;
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route element={<MainLayout />}>
+                    <Route path="/" element={<div>home</div>} />
+                    <Route path="/main" element={<div>main component</div>} />
+                    <Route path="/addquestion" element={<div>add question</div>} />
+                    <Route path="/forbidden" element={<div>forbidden</div>} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
