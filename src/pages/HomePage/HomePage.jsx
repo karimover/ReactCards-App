@@ -2,30 +2,32 @@ import { useState, useEffect } from "react";
 import { API_URL } from "../../constants";
 import { QuestionCardList } from "../../components/QuestionCardList/";
 import { Loader } from "../../components/Loader";
+import { useFetch } from "../../hooks/useFetch";
 // import cls from "./HomePage.module.css";
 
 export const HomePage = () => {
     const [questions, setQuestions] = useState([]);
 
-    const getQuestions = async () => {
-        try {
-            const response = await fetch(`${API_URL}/react`);
-            const questions = await response.json();
-            setQuestions(questions);
-            console.log("questions", questions);
-        } catch (error) {
-            console.error(error);
+    const [getQuestions, isLoading, error] = useFetch(async (url) => {
+        const response = await fetch(`${API_URL}/${url}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    };
+        
+        const questions = await response.json();
+        setQuestions(questions);
+        return questions;
+    });
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        getQuestions();
+        getQuestions("react11");
     }, []);
 
     return (
         <>
-            <Loader />
+            {isLoading && <Loader />}
+            {error && <p>{error}</p>}
             <QuestionCardList cards={questions} />
         </>
     );
