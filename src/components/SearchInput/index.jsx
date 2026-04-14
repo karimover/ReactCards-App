@@ -1,1 +1,1 @@
-export { SearchInput } from "./SearchInput.jsx";
+export { SearchInput } from "./SearchInput";
