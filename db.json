@@ -102,7 +102,7 @@
         "https://reactrouter.com/en/main"
       ],
       "level": 2,
-      "completed": true
+      "completed": false
     },
     {
       "id": "10",
@@ -113,7 +113,7 @@
         "https://react.dev/learn/keeping-components-pure"
       ],
       "level": 3,
-      "completed": true
+      "completed": false
     },
     {
       "id": "11",

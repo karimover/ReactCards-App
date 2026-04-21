@@ -21,6 +21,10 @@ export const QuestionPage = () => {
         const response = await fetch(`${API_URL}/react/${id}`);
         const data = await response.json();
 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         setCard(data);
     });
     const [uptadeCard, isCardUpdating] = useFetch(async (isChecked) => {
