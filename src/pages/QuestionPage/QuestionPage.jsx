@@ -42,6 +42,7 @@ export const QuestionPage = () => {
     }, []);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         card !== null && setIsChecked(card.completed);
     }, [card]);
     const onCheckboxChangeHandler = () => {
