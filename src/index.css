@@ -7,6 +7,7 @@
   --btn-text-color: #fff;
 
   --card-bg-color: #343a46;
+  --green-color: #219679;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -52,6 +53,7 @@ body {
 
 
     --card-bg-color: #ebedf0;
+    --green-color: #219679;
   }
 }
 
@@ -64,5 +66,6 @@ body {
     --btn-text-color: #57C4CD;
 
     --card-bg-color: #343a46;
+    --green-color: #219679;
   }
 }
