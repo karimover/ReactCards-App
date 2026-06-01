@@ -32,6 +32,7 @@ export default defineConfig([
                     tabWidth: 4,
                 },
             ],
+            "no-console": "error",
         },
     },
 ]);
