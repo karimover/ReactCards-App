@@ -22,7 +22,7 @@ export const EditQuestionPage = () => {
     return (
         <>
             {isQuestionLoading && <Loader />}
-            {question && <EditQuestion initialState={question}/>}
+            {question && <EditQuestion initialState={question} />}
         </>
     );
 };
