@@ -23,7 +23,7 @@
       ],
       "level": 2,
       "completed": false,
-      "editDate": "03.02.2025, 20:25"
+      "editDate": "02.06.2026, 02:11"
     },
     {
       "id": "3",
@@ -565,5 +565,6 @@
       "level": 1,
       "completed": false
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
