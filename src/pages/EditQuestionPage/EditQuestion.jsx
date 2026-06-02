@@ -60,7 +60,7 @@ export const EditQuestion = ({ initialState = {} }) => {
     const onRemoveQuestionHandler = () => {
         const isRemove = confirm("Are you sure?");
         isRemove && removeQuestion();
-    }
+    };
 
     return (
         <>
