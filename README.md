@@ -1,16 +1,93 @@
-# React + Vite
+# ReactCards App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Приложение-база знаний по React в формате карточек. Позволяет просматривать вопросы с ответами, фильтровать и сортировать их, а также добавлять и редактировать карточки в режиме администратора.
 
-Currently, two official plugins are available:
+##  Стек технологий
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** — функциональные компоненты, хуки
+- **React Router DOM 7** — клиентский роутинг, защищённые маршруты
+- **Vite 8** — сборка и dev-сервер с HMR
+- **JSON Server** — локальный REST API (mock-бэкенд)
+- **React Toastify** — уведомления об ошибках и успешных действиях
+- **CSS Modules** — модульная изолированная стилизация
 
-## React Compiler
+##  Функциональность
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Просмотр списка карточек с вопросами по React с пагинацией
+- Поиск по вопросам на стороне клиента
+- Сортировка по уровню сложности и статусу выполнения
+- Настройка количества карточек на странице (10 / 20 / 30 / 50 / 100)
+- Детальная страница карточки: вопрос, ответ, описание, ссылки на ресурсы
+- Отметка карточки как выполненной с мгновенным сохранением на сервер
+- Добавление и редактирование карточек (только для авторизованных)
+- Переключение светлой / тёмной темы с сохранением в `localStorage`
+- Авторизация (имитация) с персистентностью через `localStorage`
 
-## Expanding the ESLint configuration
+##  Архитектура
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── auth/
+│   └── AuthProvider/       # Контекст авторизации
+├── components/
+│   ├── Badge/              # Бейдж уровня и статуса
+│   ├── Button/             # Переиспользуемая кнопка
+│   ├── Header/             # Шапка с навигацией и логином
+│   ├── Loader/             # Полноэкранный и мини-лоадер
+│   ├── MainLayout/         # Обёртка страниц
+│   ├── QuestionCard/       # Карточка в списке
+│   ├── QuestionCardList/   # Список карточек
+│   ├── QuestionForm/       # Форма добавления / редактирования
+│   └── SearchInput/        # Поле поиска
+├── features/
+│   └── ThemeToggler/       # Переключатель темы
+├── hooks/
+│   ├── useFetch.js         # Универсальный хук для fetch-запросов
+│   ├── useAuth.js          # Хук доступа к контексту авторизации
+│   └── useTheme.js         # Хук доступа к контексту темы
+├── pages/
+│   ├── HomePage/           # Список карточек с фильтрами
+│   ├── QuestionPage/       # Детальная страница карточки
+│   ├── AddQuestionPage/    # Добавление карточки (lazy)
+│   ├── EditQuestionPage/   # Редактирование карточки (lazy)
+│   ├── ForbiddenPage/      # Страница 403
+│   └── NotFoundPage/       # Страница 404
+├── theme/
+│   └── ThemeProvider.jsx   # Контекст темы с media query
+├── helpers/
+│   ├── dateFormat.js
+│   └── delayFn.js
+└── constants/index.js
+```
+
+## ⚙️ Запуск проекта
+
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск бэкенда (JSON Server) и фронтенда одновременно
+npm run start:app
+
+# Или по отдельности:
+npm run server   # JSON Server на порту 8801
+npm run dev      # Vite dev-сервер
+```
+
+Перед запуском убедитесь, что файл `.env` содержит адрес сервера:
+
+```
+VITE_SERVER_URL=http://localhost:8801
+```
+
+## 💡 Что реализовано и изучено
+
+- Кастомный хук `useFetch` — обёртка над `fetch` с управлением состоянием загрузки и ошибок
+- `Context API` — два независимых контекста: авторизация и тема
+- Защищённые маршруты (`ProtectedRoutes`) через `React Router`
+- Lazy-загрузка страниц через `React.lazy` + `Suspense`
+- `useActionState` (React 19) для управления состоянием формы
+- `useMemo` для оптимизации фильтрации и пагинации
+- `useLayoutEffect` для синхронного применения темы без мерцания
+- `useId` для доступных `label/input` связок
+- Отслеживание системной темы через `window.matchMedia`
